@@ -1,8 +1,27 @@
-values = [8, 7, 12, 6, 2, 3]
-weights = [5, 6, 10, 4, 1, 1]
+function input(prompt::AbstractString="")
+    print(prompt)
+    return parse(Int64, chomp(readline()))
+end
+
+function input_special(prompt::AbstractString="")
+    print(prompt)
+    s = split(chomp(readline()), ",")
+    return parse.(Int64, s)
+end
+
+weights = []
+values = []
+num_items = input("Enter number of items: ")
+for i in 1:num_items
+    r = input_special("Enter weight and value comma separated for item $i: ")
+    append!(weights, r[1])
+    append!(values, r[2])
+end
+# values = [8, 7, 12, 6, 2, 3]
+# weights = [5, 6, 10, 4, 1, 1]
 ks_solution_weights = []
 ks_solution_values = []
-ks_max_weight = 16
+ks_max_weight = input("Enter limit of the collection: ")#16
 
 function calculate_heuristic(arr)
     # Returns sum of values
